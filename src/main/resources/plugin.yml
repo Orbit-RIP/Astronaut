@@ -1,0 +1,24 @@
+name: oStaff
+version: ${project.version}
+main: rip.orbit.ostaff.oStaff
+prefix: [oStaff]
+load: STARTUP
+authors: [Orbit Development]
+description: Essential Staff Plugin for Orbit.rip
+website: rip.orbit
+
+commands:
+  editstaff:
+  togglestaff:
+    aliases:
+      - hidestaff
+      - showstaff
+  vanish:
+    aliases:
+      - v
+  staffmode:
+    aliases:
+      - mod
+      - modmode
+      - staff
+      - h
