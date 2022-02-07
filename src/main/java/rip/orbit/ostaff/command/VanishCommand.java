@@ -9,11 +9,6 @@ import org.bukkit.entity.Player;
 import rip.orbit.ostaff.oStaff;
 import rip.orbit.ostaff.util.CC;
 
-/**
- * @author LBuddyBoy (lbuddyboy.me)
- * 19/07/2021 / 12:15 AM
- * oStaff / rip.orbit.ostaff.command
- */
 public class VanishCommand implements CommandExecutor {
 
 	@Override

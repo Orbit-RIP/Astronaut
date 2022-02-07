@@ -25,7 +25,7 @@ public class EditItem {
 	@Getter private static Map<UUID, EditItem> itemEdits = new HashMap<>();
 
 	private final oStaff plugin = oStaff.getInstance();
-	private final MongoCollection<Document> collection = oStaff.getInstance().getMongoDatabase().getCollection("edititems");
+	private final MongoCollection<Document> collection = oStaff.getInstance().getMongoHandler().getMongoDatabase().getCollection("edititems");
 
 	private final UUID uuid;
 
@@ -34,7 +34,7 @@ public class EditItem {
 	private int vanishSlot = 2;
 	private int worldEditSlot = 2;
 	private int betterViewSlot = 4;
-	private int reportsSlot = 6;
+	private int staffOnlineSlot = 6;
 	private int freezerSlot = 7;
 	private int inspectorSlot = 8;
 	private int betterViewData = 0;
@@ -44,7 +44,7 @@ public class EditItem {
 	private boolean freezerEnabled = true;
 	private boolean inspectorEnabled = true;
 	private boolean randomTPEnabled = true;
-	private boolean reportsEnabled = true;
+	private boolean staffOnlineEnabled = true;
 	private boolean thruCompassEnabled = true;
 	private boolean vanishEnabled = true;
 	private boolean worldEditEnabled = true;
@@ -65,7 +65,7 @@ public class EditItem {
 		this.randomTPSlot = document.getInteger("randomTPSlot");
 		this.vanishSlot = document.getInteger("vanishSlot");
 		this.betterViewSlot = document.getInteger("betterViewSlot");
-		this.reportsSlot = document.getInteger("reportsSlot");
+		this.staffOnlineSlot = document.getInteger("staffOnlineSlot");
 		this.freezerSlot = document.getInteger("freezerSlot");
 		this.inspectorSlot = document.getInteger("inspectorSlot");
 		this.worldEditSlot = document.getInteger("worldEditSlot");
@@ -75,7 +75,7 @@ public class EditItem {
 		this.freezerEnabled = document.getBoolean("freezerEnabled");
 		this.inspectorEnabled = document.getBoolean("inspectorEnabled");
 		this.randomTPEnabled = document.getBoolean("randomTPEnabled");
-		this.reportsEnabled = document.getBoolean("reportsEnabled");
+		this.staffOnlineEnabled = document.getBoolean("staffOnlineEnabled");
 		this.thruCompassEnabled = document.getBoolean("thruCompassEnabled");
 		this.vanishEnabled = document.getBoolean("vanishEnabled");
 		this.worldEditEnabled = document.getBoolean("worldEditEnabled");
@@ -91,7 +91,7 @@ public class EditItem {
 			document.put("randomTPSlot", this.randomTPSlot);
 			document.put("vanishSlot", this.vanishSlot);
 			document.put("betterViewSlot", this.betterViewSlot);
-			document.put("reportsSlot", this.reportsSlot);
+			document.put("staffOnlineSlot", this.staffOnlineSlot);
 			document.put("freezerSlot", this.freezerSlot);
 			document.put("inspectorSlot", this.inspectorSlot);
 			document.put("worldEditSlot", this.worldEditSlot);
@@ -101,7 +101,7 @@ public class EditItem {
 			document.put("freezerEnabled", this.freezerEnabled);
 			document.put("inspectorEnabled", this.inspectorEnabled);
 			document.put("randomTPEnabled", this.randomTPEnabled);
-			document.put("reportsEnabled", this.reportsEnabled);
+			document.put("staffOnlineEnabled", this.staffOnlineEnabled);
 			document.put("thruCompassEnabled", this.thruCompassEnabled);
 			document.put("vanishEnabled", this.vanishEnabled);
 			document.put("worldEditEnabled", this.worldEditEnabled);

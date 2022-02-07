@@ -88,6 +88,6 @@ public class WorldEditSlotMenu extends Menu {
 
 	@Override
 	public String getTitle(Player player) {
-		return "WorldEdit Slot Editor";
+		return "WorldEdit Slot Editor (Senior Admin +)";
 	}
 }

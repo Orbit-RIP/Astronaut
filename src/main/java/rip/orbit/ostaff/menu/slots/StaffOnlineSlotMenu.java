@@ -21,7 +21,7 @@ import java.util.List;
  * 19/07/2021 / 12:56 AM
  * oStaff / rip.orbit.ostaff.menu.slots
  */
-public class ReportsSlotMenu extends Menu {
+public class StaffOnlineSlotMenu extends Menu {
 	@Override
 	public List<Button> buttons(Player player) {
 		List<Button> buttons = new ArrayList<>();
@@ -32,7 +32,7 @@ public class ReportsSlotMenu extends Menu {
 			buttons.add(new Button() {
 				@Override
 				public ItemStack stack(Player player) {
-					if (loadOut.getReportsSlot() == (finalI)) {
+					if (loadOut.getStaffOnlineSlot() == (finalI)) {
 						return new ItemBuilder(Material.INK_SACK).setData(10).setDisplayName(CC.chat("&aSlot #" + (finalI + 1))).create();
 					}
 					return new ItemBuilder(Material.INK_SACK).setData(DyeColor.SILVER.getData()).setDisplayName(CC.chat("&7Slot #" + (finalI + 1))).create();
@@ -50,9 +50,9 @@ public class ReportsSlotMenu extends Menu {
 
 				@Override
 				public void action(Player player, int slot, InventoryClickEvent event) {
-					loadOut.setReportsSlot((finalI));
+					loadOut.setStaffOnlineSlot((finalI));
 					loadOut.save();
-					player.sendMessage(CC.chat("&cSet your reports slot to the #" + (finalI + 1) + " slot."));
+					player.sendMessage(CC.chat("&cSet your staff online slot to the #" + (finalI + 1) + " slot."));
 
 					oStaff.getInstance().getStaffModeHandler().unloadStaffMode(player);
 					oStaff.getInstance().getStaffModeHandler().loadStaffMode(player);
@@ -88,6 +88,6 @@ public class ReportsSlotMenu extends Menu {
 
 	@Override
 	public String getTitle(Player player) {
-		return "Reports Slot Editor";
+		return "Staff Online Slot Editor";
 	}
 }

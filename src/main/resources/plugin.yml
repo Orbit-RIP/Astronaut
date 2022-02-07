@@ -1,11 +1,8 @@
 name: oStaff
-version: ${project.version}
+version: 2.0
 main: rip.orbit.ostaff.oStaff
-prefix: [oStaff]
 load: STARTUP
-authors: [Orbit Development]
-description: Essential Staff Plugin for Orbit.rip
-website: rip.orbit
+author: Alfie, Branched
 
 commands:
   editstaff:

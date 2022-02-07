@@ -179,11 +179,11 @@ public class EditItemMainMenu extends Menu {
 		buttons.add(new Button() {
 			@Override
 			public ItemStack stack(Player player) {
-				String status = (item.isReportsEnabled() ? CC.chat("&a(Enabled)") : CC.chat("&c(Disabled)"));
+				String status = (item.isStaffOnlineEnabled() ? CC.chat("&a(Enabled)") : CC.chat("&c(Disabled)"));
 				return new ItemBuilder(Material.PAPER).setLore(CC.chat(Arrays.asList("" +
 								"&7Left Click to modify the slot",
 						"&7Right Click to toggle/enable it"
-				))).setDisplayName(CC.chat("&6Reports Slot Editor " + status)).create();
+				))).setDisplayName(CC.chat("&6Staff Online Slot Editor " + status)).create();
 			}
 
 			@Override
@@ -199,9 +199,9 @@ public class EditItemMainMenu extends Menu {
 			@Override
 			public void action(Player player, int slot, InventoryClickEvent event) {
 				if (event.getClick() == ClickType.LEFT) {
-					new ReportsSlotMenu().openMenu(player);
+					new StaffOnlineSlotMenu().openMenu(player);
 				} else {
-					item.setReportsEnabled(!item.isReportsEnabled());
+					item.setStaffOnlineEnabled(!item.isStaffOnlineEnabled());
 					item.save();
 
 					oStaff.getInstance().getStaffModeHandler().unloadStaffMode(player);

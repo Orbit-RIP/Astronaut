@@ -14,6 +14,7 @@ import rip.orbit.ostaff.util.CC;
 import rip.orbit.ostaff.util.ItemBuilder;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Getter
@@ -24,12 +25,15 @@ public class StaffModeHandler {
 	public HashMap<UUID, ItemStack[]> prevInventory;
 	public HashMap<UUID, ItemStack[]> prevInventoryArmor;
 
+	@Getter
+	private final static Map<Player, StaffModeHandler> staffModeMap = new HashMap<>();
+
 	private ItemStack thruCompass = new ItemBuilder(Material.COMPASS).setDisplayName(CC.chat("&6Phase Compass")).create();
 	private ItemStack randomTP = new ItemBuilder(Material.WATCH).setDisplayName(CC.chat("&6Random Teleport")).create();
-	private ItemStack vanishon = new ItemBuilder(Material.INK_SACK).setData(10).setDisplayName(CC.chat("&aVanish (On)")).create();
-	private ItemStack vanishoff = new ItemBuilder(Material.INK_SACK).setData(8).setDisplayName(CC.chat("&7Vanish (Off)")).create();
+	private ItemStack vanishon = new ItemBuilder(Material.INK_SACK).setData(10).setDisplayName(CC.chat("&6Vanish &a[On]")).create();
+	private ItemStack vanishoff = new ItemBuilder(Material.INK_SACK).setData(8).setDisplayName(CC.chat("&6Vanish &c[Off]")).create();
 	private ItemStack betterview = new ItemBuilder(Material.CARPET).setDisplayName(CC.chat("&6Better View")).create();
-	private ItemStack reports = new ItemBuilder(Material.PAPER).setDisplayName(CC.chat("&6Reports")).create();
+	private ItemStack staffOnline = new ItemBuilder(Material.SKULL_ITEM).setDisplayName(CC.chat("&6Staff Online")).create();
 	private ItemStack freezer = new ItemBuilder(Material.ICE).setDisplayName(CC.chat("&6Freezer")).create();
 	private ItemStack inspector = new ItemBuilder(Material.BOOK).setDisplayName(CC.chat("&6Inspector")).create();
 	private ItemStack worldedit = new ItemBuilder(Material.WOOD_AXE).setDisplayName(CC.chat("&6WorldEdit Wand")).create();
@@ -51,6 +55,7 @@ public class StaffModeHandler {
 		prevInventoryArmor.put(player.getUniqueId(), player.getInventory().getArmorContents());
 		player.getInventory().clear();
 		player.setMetadata("modmode", new FixedMetadataValue(plugin, player));
+		staffModeMap.put(player, this);
 		if (player.isOp()) {
 			if (editItem.isWorldEditEnabled()) {
 				player.getInventory().setItem(editItem.getWorldEditSlot(), worldedit);
@@ -71,8 +76,8 @@ public class StaffModeHandler {
 		if (editItem.isBetterViewEnabled()) {
 			player.getInventory().setItem(editItem.getBetterViewSlot(), stack);
 		}
-		if (editItem.isReportsEnabled()) {
-			player.getInventory().setItem(editItem.getReportsSlot(), reports);
+		if (editItem.isStaffOnlineEnabled()) {
+			player.getInventory().setItem(editItem.getStaffOnlineSlot(), staffOnline);
 		}
 		if (editItem.isFreezerEnabled()) {
 			player.getInventory().setItem(editItem.getFreezerSlot(), freezer);
@@ -91,6 +96,7 @@ public class StaffModeHandler {
 		player.getInventory().setContents(prevInventory.get(player.getUniqueId()));
 		prevInventory.remove(player.getUniqueId());
 		player.removeMetadata("modmode", plugin);
+		staffModeMap.remove(player);
 		unloadVanish(player);
 		player.setGameMode(GameMode.SURVIVAL);
 		player.updateInventory();
@@ -99,7 +105,7 @@ public class StaffModeHandler {
 	public void loadVanish(Player player) {
 		player.setMetadata("invisible", new FixedMetadataValue(plugin, player));
 		for (Player on : Bukkit.getOnlinePlayers()) {
-			if (!on.hasPermission("ostaff.staff")) {
+			if (!on.hasPermission("orbit.staff")) {
 				on.hidePlayer(player);
 			}
 		}
@@ -108,7 +114,7 @@ public class StaffModeHandler {
 	public void unloadVanish(Player player) {
 		player.removeMetadata("invisible", plugin);
 		for (Player on : Bukkit.getOnlinePlayers()) {
-			if (!on.hasPermission("ostaff.staff")) {
+			if (!on.hasPermission("orbit.staff")) {
 				on.showPlayer(player);
 			}
 		}

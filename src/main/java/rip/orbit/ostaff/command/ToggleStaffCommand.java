@@ -11,15 +11,10 @@ import org.bukkit.metadata.FixedMetadataValue;
 import rip.orbit.ostaff.oStaff;
 import rip.orbit.ostaff.util.CC;
 
-/**
- * @author LBuddyBoy (lbuddyboy.me)
- * 19/07/2021 / 12:19 AM
- * oStaff / rip.orbit.ostaff.command
- */
 public class ToggleStaffCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (!sender.hasPermission("ostaff.staff")) {
+		if (!sender.hasPermission("orbit.staff")) {
 			sender.sendMessage(CC.chat("&cNo permission."));
 			return false;
 		}
